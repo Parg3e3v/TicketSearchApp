@@ -10,6 +10,6 @@ class OffersRepositoryImpl @Inject constructor(
     private val api: Api
 ): OffersRepository {
     override suspend fun getOffers(): List<Offer> =
-        api.getAllOffers().items.map { it.toOffer() }
+        api.getAllOffers().offers.map { it.toOffer() }
 
 }

@@ -1,4 +1,4 @@
-package com.parg3v.ticketsearchapp.view.home
+package com.parg3v.ticketsearchapp.view.todoScreen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun HomeScreen() {
+fun ToDoScreen(text: String) {
     Box(modifier = Modifier.fillMaxSize()) {
-        Text(text = "Hello Home", modifier = Modifier.align(Alignment.Center))
+        Text(text = text, modifier = Modifier.align(Alignment.Center))
     }
 }

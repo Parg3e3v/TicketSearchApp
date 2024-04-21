@@ -8,6 +8,9 @@ sealed class BottomNavItem(
     val route: String,
     val icon: Int
 ) {
-    object Home :
-        BottomNavItem("", Screen.HomeScreen.route, R.drawable.ic_launcher_background)
+    object AirlineTickets : BottomNavItem("Авиабилеты", Screen.AirlineTicketsScreen.route, R.drawable.airline_tickets_icon)
+    object Hotels : BottomNavItem("Отели", Screen.HotelsScreen.route, R.drawable.hotels_icon)
+    object InShort : BottomNavItem("Короче", Screen.InShortScreen.route, R.drawable.in_short_icon)
+    object Subscriptions : BottomNavItem("Подписки", Screen.SubscriptionsScreen.route, R.drawable.subscriptions_icon)
+    object Profile : BottomNavItem("Профиль", Screen.ProfileScreen.route, R.drawable.profile_icon)
 }

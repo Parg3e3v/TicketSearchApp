@@ -1,7 +1,7 @@
 package com.parg3v.ticketsearchapp.components
 
-
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -31,7 +31,7 @@ fun BottomNavigationBar(
             NavigationBarItem(
                 selected = selected,
                 onClick = { onItemClick(item) },
-                label = { Text(text = item.title) },
+                label = { Text(text = item.title, style = MaterialTheme.typography.labelSmall) },
                 modifier = modifier,
                 icon = {
                     Icon(
