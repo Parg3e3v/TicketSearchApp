@@ -14,6 +14,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.parg3v.ticketsearchapp.model.BottomNavItem
+import com.parg3v.ticketsearchapp.ui.theme.Black
+import com.parg3v.ticketsearchapp.ui.theme.Blue
+import com.parg3v.ticketsearchapp.ui.theme.Grey6
 
 @Composable
 fun BottomNavigationBar(
@@ -24,7 +27,7 @@ fun BottomNavigationBar(
 ) {
     val backStackEntry = navController.currentBackStackEntryAsState()
     NavigationBar(
-        containerColor = Color.Transparent
+        containerColor = Black
     ) {
         items.forEach { item ->
             val selected = item.route == backStackEntry.value?.destination?.route
@@ -41,9 +44,11 @@ fun BottomNavigationBar(
                 },
                 colors = NavigationBarItemDefaults
                     .colors(
-                        selectedIconColor = Color.Blue,
-                        selectedTextColor = Color.Blue,
-                        indicatorColor = Color.White
+                        selectedIconColor = Blue,
+                        selectedTextColor = Blue,
+                        indicatorColor = Color.Transparent,
+                        unselectedIconColor = Grey6,
+                        unselectedTextColor = Grey6
                     )
             )
         }

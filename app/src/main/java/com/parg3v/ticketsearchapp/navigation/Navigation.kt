@@ -9,15 +9,17 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.parg3v.ticketsearchapp.view.airlineTickets.AirlineTicketsScreen
 import com.parg3v.ticketsearchapp.view.airlineTickets.AirlineTicketsViewModel
-import com.parg3v.ticketsearchapp.view.airlineTickets.HomeScreen
 import com.parg3v.ticketsearchapp.view.todoScreen.ToDoScreen
 
 @Composable
@@ -49,36 +51,51 @@ fun Navigation(
             route = Screen.AirlineTicketsScreen.route,
             popEnterTransition = { slideIn },
             exitTransition = { slideOut }
-        ){
+        ) {
             val offersState by airlineTicketsViewModel.offersState.collectAsStateWithLifecycle()
-            HomeScreen(navController = navController, offersState = offersState)
+            val fromFieldValue by airlineTicketsViewModel.fromFieldState.collectAsStateWithLifecycle()
+            val toFieldValue by airlineTicketsViewModel.toFieldState.collectAsStateWithLifecycle()
+            val context = LocalContext.current
+
+            LaunchedEffect(Unit) {
+                airlineTicketsViewModel.getFromFieldValue(context = context)
+            }
+
+            AirlineTicketsScreen(
+                navController = navController,
+                offersStateProvider = { offersState },
+                fromFieldStateProvider = { fromFieldValue.data },
+                fromFieldInputChange = airlineTicketsViewModel::validateFromField,
+                toFieldStateProvider = { toFieldValue },
+                toFieldInputChange = airlineTicketsViewModel::validateToField
+            )
         }
         composable(
             route = Screen.HotelsScreen.route,
             popEnterTransition = { slideIn },
             exitTransition = { slideOut }
-        ){
+        ) {
             ToDoScreen(text = Screen.HotelsScreen.route)
         }
         composable(
             route = Screen.InShortScreen.route,
             popEnterTransition = { slideIn },
             exitTransition = { slideOut }
-        ){
+        ) {
             ToDoScreen(text = Screen.InShortScreen.route)
         }
         composable(
             route = Screen.SubscriptionsScreen.route,
             popEnterTransition = { slideIn },
             exitTransition = { slideOut }
-        ){
+        ) {
             ToDoScreen(text = Screen.SubscriptionsScreen.route)
         }
         composable(
             route = Screen.ProfileScreen.route,
             popEnterTransition = { slideIn },
             exitTransition = { slideOut }
-        ){
+        ) {
             ToDoScreen(text = Screen.ProfileScreen.route)
         }
     }

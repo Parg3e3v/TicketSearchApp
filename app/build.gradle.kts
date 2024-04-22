@@ -85,9 +85,4 @@ dependencies {
 
     // Navigation Animation
     implementation(libs.accompanist.navigation.animation)
-
-    // Pager
-    implementation (libs.accompanist.pager)
-    implementation (libs.accompanist.pager.indicators)
-    implementation(kotlin("reflect"))
 }

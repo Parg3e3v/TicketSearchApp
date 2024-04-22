@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_airlines_top">28dp</dimen>
+    <dimen name="from_to_where_search_radius">16dp</dimen>
+    <dimen name="from_to_where_search_inner_padding">16dp</dimen>
+    <dimen name="from_to_where_search_padding_all">16dp</dimen>
+    <dimen name="from_to_where_search_padding_start">8dp</dimen>
+    <dimen name="padding_airlines_search_top">36dp</dimen>
+    <dimen name="padding_airlines_screen_horizontal">16dp</dimen>
+    <dimen name="padding_airlines_search_spacer_start">16dp</dimen>
+    <dimen name="padding_airlines_music_title_top">32dp</dimen>
+    <dimen name="offer_card_text_top_padding">8dp</dimen>
+    <dimen name="offer_card_image_size">132dp</dimen>
+    <dimen name="offer_card_image_radius">16dp</dimen>
+    <dimen name="offer_card_price_icon_size">24dp</dimen>
+    <dimen name="offer_card_space_between">67dp</dimen>
+    <dimen name="offer_cards_section_top_padding">25dp</dimen>
+    <dimen name="search_text_field_text_padding_horizotnal">8dp</dimen>
+</resources>

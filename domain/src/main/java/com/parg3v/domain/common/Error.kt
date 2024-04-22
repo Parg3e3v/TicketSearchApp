@@ -5,3 +5,7 @@ sealed interface Error
 enum class OfferError: Error {
     BASIC
 }
+
+enum class FieldFromError: Error {
+    BASIC
+}
