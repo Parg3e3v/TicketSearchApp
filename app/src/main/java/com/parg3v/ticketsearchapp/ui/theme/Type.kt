@@ -32,7 +32,7 @@ val Typography = Typography(
     ),
     bodyMedium = TextStyle(                  /* Text 2 */
         fontSize = 14.sp,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.Normal,
     ),
     labelMedium = TextStyle(                 /* Button Text */
         fontSize = 16.sp,

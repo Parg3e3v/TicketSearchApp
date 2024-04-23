@@ -1,5 +1,6 @@
 package com.parg3v.ticketsearchapp.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -10,25 +11,31 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
+import androidx.navigation.navArgument
 import androidx.navigation.compose.composable
 import com.parg3v.ticketsearchapp.view.airlineTickets.AirlineTicketsScreen
 import com.parg3v.ticketsearchapp.view.airlineTickets.AirlineTicketsViewModel
 import com.parg3v.ticketsearchapp.view.todoScreen.ToDoScreen
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Navigation(
     navController: NavHostController,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    showBottomSheet: MutableState<Boolean>,
+    airlineTicketsViewModel: AirlineTicketsViewModel,
+    toFieldStateProvider: () -> String,
+    fromFieldStateProvider: () -> String?
 ) {
 
-    val airlineTicketsViewModel: AirlineTicketsViewModel = hiltViewModel()
 
     val slideIn = slideInHorizontally(
         initialOffsetX = { -300 }, animationSpec = tween(
@@ -53,8 +60,6 @@ fun Navigation(
             exitTransition = { slideOut }
         ) {
             val offersState by airlineTicketsViewModel.offersState.collectAsStateWithLifecycle()
-            val fromFieldValue by airlineTicketsViewModel.fromFieldState.collectAsStateWithLifecycle()
-            val toFieldValue by airlineTicketsViewModel.toFieldState.collectAsStateWithLifecycle()
             val context = LocalContext.current
 
             LaunchedEffect(Unit) {
@@ -62,41 +67,24 @@ fun Navigation(
             }
 
             AirlineTicketsScreen(
-                navController = navController,
                 offersStateProvider = { offersState },
-                fromFieldStateProvider = { fromFieldValue.data },
+                fromFieldStateProvider = fromFieldStateProvider,
                 fromFieldInputChange = airlineTicketsViewModel::validateFromField,
-                toFieldStateProvider = { toFieldValue },
-                toFieldInputChange = airlineTicketsViewModel::validateToField
+                toFieldStateProvider = toFieldStateProvider,
+                toFieldInputChange = airlineTicketsViewModel::validateToField,
+                showBottomSheet = showBottomSheet
             )
         }
-        composable(
-            route = Screen.HotelsScreen.route,
-            popEnterTransition = { slideIn },
-            exitTransition = { slideOut }
-        ) {
-            ToDoScreen(text = Screen.HotelsScreen.route)
-        }
-        composable(
-            route = Screen.InShortScreen.route,
-            popEnterTransition = { slideIn },
-            exitTransition = { slideOut }
-        ) {
-            ToDoScreen(text = Screen.InShortScreen.route)
-        }
-        composable(
-            route = Screen.SubscriptionsScreen.route,
-            popEnterTransition = { slideIn },
-            exitTransition = { slideOut }
-        ) {
-            ToDoScreen(text = Screen.SubscriptionsScreen.route)
-        }
-        composable(
-            route = Screen.ProfileScreen.route,
-            popEnterTransition = { slideIn },
-            exitTransition = { slideOut }
-        ) {
-            ToDoScreen(text = Screen.ProfileScreen.route)
+        composable(route = "${Screen.ToDoScreen.route}/{title}",
+            arguments = listOf(navArgument("title") {
+                type = NavType.StringType
+                defaultValue = "To Do"
+                nullable = false
+            }),
+            exitTransition = { slideOut },
+            popEnterTransition = { slideIn }) { entry ->
+            val title = entry.arguments?.getString("title")
+            ToDoScreen(text = title ?: "To Do", navController = navController)
         }
     }
 }

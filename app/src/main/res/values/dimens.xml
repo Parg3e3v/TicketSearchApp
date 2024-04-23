@@ -6,7 +6,7 @@
     <dimen name="from_to_where_search_padding_all">16dp</dimen>
     <dimen name="from_to_where_search_padding_start">8dp</dimen>
     <dimen name="padding_airlines_search_top">36dp</dimen>
-    <dimen name="padding_airlines_screen_horizontal">16dp</dimen>
+    <dimen name="padding_screen_horizontal">16dp</dimen>
     <dimen name="padding_airlines_search_spacer_start">16dp</dimen>
     <dimen name="padding_airlines_music_title_top">32dp</dimen>
     <dimen name="offer_card_text_top_padding">8dp</dimen>
@@ -16,4 +16,18 @@
     <dimen name="offer_card_space_between">67dp</dimen>
     <dimen name="offer_cards_section_top_padding">25dp</dimen>
     <dimen name="search_text_field_text_padding_horizotnal">8dp</dimen>
+    <dimen name="search_screen_places_space">8dp</dimen>
+    <dimen name="search_screen_places_padding_top">30dp</dimen>
+    <dimen name="recommended_place_card_image_size">40dp</dimen>
+    <dimen name="recommended_place_card_image_radius">8dp</dimen>
+    <dimen name="recommended_place_card_padding_vertical">8dp</dimen>
+    <dimen name="recommended_place_card_padding_title_start">8dp</dimen>
+    <dimen name="recommended_place_card_subtitle_top_padding">4dp</dimen>
+    <dimen name="recommended_place_card_padding">16dp</dimen>
+    <dimen name="recommended_place_card_padding_between">8dp</dimen>
+    <dimen name="search_screen_padding">16dp</dimen>
+    <dimen name="hint_card_icon_radius">8dp</dimen>
+    <dimen name="hint_card_icon_inner_padding">12dp</dimen>
+    <dimen name="search_screen_hints_padding_top">24dp</dimen>
+    <dimen name="hint_card_text_padding_top">8dp</dimen>
 </resources>

@@ -5,4 +5,12 @@
     <string name="ticket_price">от %1$s ₽</string>
     <string name="where_to_placeholder">Куда - Турция</string>
     <string name="where_from_placeholder">Откуда - Москва</string>
+    <string name="stambul">Стамбул</string>
+    <string name="sochi">Сочи</string>
+    <string name="pxuket">Пхукет</string>
+    <string name="recommended_place">Популярное направление</string>
+    <string name="hard_route">Сложный маршрут</string>
+    <string name="random">Куда угодно</string>
+    <string name="holidays">Выходные</string>
+    <string name="hot_tickets">Горячие билеты</string>
 </resources>
