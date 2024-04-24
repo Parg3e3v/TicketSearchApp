@@ -1,8 +1,8 @@
 package com.parg3v.data.model
 
-data class OfferModel(
+class TicketOfferModel(
     val id: Int,
     val title: String,
-    val town: String,
+    val time_range: List<String>,
     val price: PriceModel
 )

@@ -3,6 +3,7 @@
     <string name="airline_tickets_title">Поиск дешевых\nавиабилетов</string>
     <string name="airline_tickets_title_music">Музыкально отлететь</string>
     <string name="ticket_price">от %1$s ₽</string>
+    <string name="ticket_offer_price">%1$s ₽</string>
     <string name="where_to_placeholder">Куда - Турция</string>
     <string name="where_from_placeholder">Откуда - Москва</string>
     <string name="stambul">Стамбул</string>
@@ -13,4 +14,10 @@
     <string name="random">Куда угодно</string>
     <string name="holidays">Выходные</string>
     <string name="hot_tickets">Горячие билеты</string>
+    <string name="direct_rails">Прямые рельсы</string>
+    <string name="see_all_tickets">Посмотреть все билеты</string>
+    <string name="back">обратно</string>
+    <string name="temp_passangers_count">1,эконом</string>
+    <string name="filters">фильтры</string>
+    <string name="date_error">Выбранная дата должна быть после сегодняшнего дня, выберите еще раз</string>
 </resources>

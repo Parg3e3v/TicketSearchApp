@@ -10,7 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.parg3v.ticketsearchapp.navigation.Navigation
-import com.parg3v.ticketsearchapp.view.airlineTickets.AirlineTicketsViewModel
+import com.parg3v.ticketsearchapp.view.CommonViewModel
 
 @Composable
 fun LoadScaffold(
@@ -19,15 +19,15 @@ fun LoadScaffold(
     showBottomSheet: MutableState<Boolean>
 ) {
 
-    val airlineTicketsViewModel: AirlineTicketsViewModel = hiltViewModel()
+    val commonViewModel: CommonViewModel = hiltViewModel()
 
-    val fromFieldValue by airlineTicketsViewModel.fromFieldState.collectAsStateWithLifecycle()
-    val toFieldValue by airlineTicketsViewModel.toFieldState.collectAsStateWithLifecycle()
-    val offersState by airlineTicketsViewModel.offersState.collectAsStateWithLifecycle()
+    val fromFieldValue by commonViewModel.fromFieldState.collectAsStateWithLifecycle()
+    val toFieldValue by commonViewModel.toFieldState.collectAsStateWithLifecycle()
+
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        airlineTicketsViewModel.getFromFieldValue(context = context)
+        commonViewModel.getFromFieldValue(context = context)
     }
 
 
@@ -35,19 +35,19 @@ fun LoadScaffold(
         modifier = modifier,
         navController = navController,
         fromFieldStateProvider = { fromFieldValue.data },
-        fromFieldInputChange = airlineTicketsViewModel::validateFromField,
+        fromFieldInputChange = commonViewModel::validateFromField,
         toFieldStateProvider = { toFieldValue },
-        toFieldInputChange = airlineTicketsViewModel::validateToField,
+        toFieldInputChange = commonViewModel::validateToField,
         showBottomSheet = showBottomSheet
     ) { paddingValues ->
         Navigation(
             navController = navController,
             paddingValues = paddingValues,
             showBottomSheet = showBottomSheet,
-            airlineTicketsViewModel = airlineTicketsViewModel,
             toFieldStateProvider = { toFieldValue },
             fromFieldStateProvider = { fromFieldValue.data },
-            offersStateProvider = { offersState }
+            toFieldInputChange = commonViewModel::validateToField,
+            fromFieldInputChange = commonViewModel::validateFromField
         )
     }
 }

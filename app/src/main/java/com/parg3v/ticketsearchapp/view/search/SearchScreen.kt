@@ -95,12 +95,20 @@ fun SearchScreen(
             toFieldStateProvider = toFieldStateProvider,
             toFieldInputChange = toFieldInputChange,
             leadingIconFrom = painterResource(id = R.drawable.plane_icon),
-            leadingIconFromTint = Grey6,
             leadingIconTo = painterResource(id = R.drawable.search_icon),
-            leadingIconToTint = Color.White,
             trailingIconTo = painterResource(id = R.drawable.close_icon),
+            leadingIconFromTint = Grey6,
+            leadingIconToTint = Color.White,
             trailingIconToTint = Grey7,
-            trailingIconToAction = { toFieldInputChange("") }
+            trailingIconToAction = { toFieldInputChange("") },
+            onToFieldDoneAction = {
+                navigateAndClose(
+                    scope,
+                    navController,
+                    closeBottomSheet,
+                    Screen.SpecificSearchScreen.route
+                )
+            },
         )
         Row(
             verticalAlignment = Alignment.Top,
@@ -119,6 +127,12 @@ fun SearchScreen(
                 } else {
                     {
                         toFieldInputChange(item.title)
+                        navigateAndClose(
+                            scope,
+                            navController,
+                            closeBottomSheet,
+                            Screen.SpecificSearchScreen.route
+                        )
                     }
                 }
 
@@ -149,7 +163,15 @@ fun SearchScreen(
                 RecommendedPlaceCard(
                     modifier = modifier,
                     item = item,
-                    onclick = { toFieldInputChange(item.title) })
+                    onclick = {
+                        toFieldInputChange(item.title)
+                        navigateAndClose(
+                            scope,
+                            navController,
+                            closeBottomSheet,
+                            Screen.SpecificSearchScreen.route
+                        )
+                    })
             }
         }
     }
@@ -161,7 +183,6 @@ fun navigateAndClose(
     closeBottomSheet: suspend () -> Unit,
     route: String
 ) {
-
     navController.navigate(route)
     scope.launch {
         closeBottomSheet()

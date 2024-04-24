@@ -1,8 +1,8 @@
 package com.parg3v.domain.module
 
-import com.parg3v.domain.use_cases.GetFromFieldFromDataStore
-import com.parg3v.domain.use_cases.SaveFromFieldToDataStore
-import com.parg3v.domain.use_cases.ValidateCyrillicText
+import com.parg3v.domain.use_cases.GetFromFieldFromDataStoreUseCase
+import com.parg3v.domain.use_cases.SaveFromFieldToDataStoreUseCase
+import com.parg3v.domain.use_cases.ValidateCyrillicTextUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,20 +15,20 @@ object AirlineTicketsModule {
 
     @Provides
     @Singleton
-    fun provideSaveFromFieldToDataStore(): SaveFromFieldToDataStore {
-        return SaveFromFieldToDataStore()
+    fun provideSaveFromFieldToDataStoreUseCase(): SaveFromFieldToDataStoreUseCase {
+        return SaveFromFieldToDataStoreUseCase()
     }
 
     @Provides
     @Singleton
-    fun provideGetFromFieldFromDataStore(): GetFromFieldFromDataStore {
-        return GetFromFieldFromDataStore()
+    fun provideGetFromFieldFromDataStoreUseCase(): GetFromFieldFromDataStoreUseCase {
+        return GetFromFieldFromDataStoreUseCase()
     }
 
     @Provides
     @Singleton
-    fun provideValidateCyrillicText(): ValidateCyrillicText {
-        return ValidateCyrillicText()
+    fun provideValidateCyrillicTextUseCase(): ValidateCyrillicTextUseCase {
+        return ValidateCyrillicTextUseCase()
     }
 
 }

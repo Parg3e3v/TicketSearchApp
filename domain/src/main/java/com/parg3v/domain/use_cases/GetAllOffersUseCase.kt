@@ -15,8 +15,8 @@ class GetAllOffersUseCase @Inject constructor(
     operator fun invoke(): Flow<Result<List<Offer>, OfferError>> = flow {
         try {
             emit(Result.Loading())
-            val products = offersRepository.getOffers()
-            emit(Result.Success(products))
+            val offers = offersRepository.getOffers()
+            emit(Result.Success(offers))
 
         } catch (e: IOException) {
             emit(Result.Error(OfferError.BASIC))

@@ -1,16 +1,13 @@
 package com.parg3v.ticketsearchapp.view.airlineTickets
 
 import android.content.Context
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,8 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.parg3v.ticketsearchapp.R
 import com.parg3v.ticketsearchapp.components.CustomSearchBar
 import com.parg3v.ticketsearchapp.components.OfferCard
+import com.parg3v.ticketsearchapp.components.RoundedBackgroundWithPadding
 import com.parg3v.ticketsearchapp.model.OffersState
-import com.parg3v.ticketsearchapp.ui.theme.Grey3
 import com.parg3v.ticketsearchapp.ui.theme.Grey7
 import com.parg3v.ticketsearchapp.ui.theme.TicketSearchAppTheme
 
@@ -57,28 +54,21 @@ fun AirlineTicketsScreen(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
         )
-        Box(
+        RoundedBackgroundWithPadding(
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(top = dimensionResource(id = R.dimen.padding_airlines_search_top))
-                .background(
-                    color = Grey3, shape = RoundedCornerShape(
-                        dimensionResource(id = R.dimen.from_to_where_search_radius)
-                    )
-                )
         ) {
             CustomSearchBar(
-                isFromClickable = true,
-                modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.from_to_where_search_inner_padding)),
                 fromFieldValueProvider = fromFieldStateProvider,
                 fromFieldInputChange = fromFieldInputChange,
                 toFieldStateProvider = toFieldStateProvider,
                 toFieldInputChange = toFieldInputChange,
                 startIcon = painterResource(id = R.drawable.search_icon),
-                onToFocused = { showBottomSheet.value = !showBottomSheet.value }
+                onToFocused = { showBottomSheet.value = !showBottomSheet.value },
+                isToFieldEnabled = false,
             )
         }
+
         Text(
             text = stringResource(id = R.string.airline_tickets_title_music),
             style = MaterialTheme.typography.titleLarge,

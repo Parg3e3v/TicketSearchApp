@@ -3,7 +3,11 @@ package com.parg3v.ticketsearchapp.navigation
 sealed class Screen(val route: String) {
     object AirlineTicketsScreen : Screen("airline_tickets_screen")
 
-    object ToDoScreen: Screen("to_do_screen")
+    object ToDoScreen : Screen("to_do_screen")
+
+    object SpecificSearchScreen : Screen("specific_search_screen")
+
+    object TicketsScreen: Screen("tickets_screen")
 
     fun withArgs(vararg args: String): String {
         return buildString {

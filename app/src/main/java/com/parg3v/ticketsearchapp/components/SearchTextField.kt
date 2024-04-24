@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,20 +39,33 @@ fun SearchTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     visualTransformation: VisualTransformation = VisualTransformation.None,
     isError: Boolean = false,
+    onFocused: () -> Unit = {},
+    enabled: Boolean = true,
     context: Context,
     leadingIcon: Painter? = null,
     leadingIconTint: Color? = null,
     trailingIcon: Painter? = null,
     trailingIconTint: Color? = null,
-    trailingIconAction: () -> Unit = {}
+    trailingIconAction: () -> Unit = {},
+    onDoneAction: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     BasicTextField(
         value = value() ?: "",
         onValueChange = { onValueChange(it, context) },
-        modifier = modifier.padding(paddingValues = PaddingValues(0.dp)),
+        enabled = enabled,
+        modifier = modifier.padding(paddingValues = PaddingValues(0.dp))
+            .clickable(
+                interactionSource = interactionSource, indication = null
+            ) { onFocused() },
         singleLine = true,
+        keyboardActions = KeyboardActions(
+            onDone = {
+                onDoneAction()
+                keyboardController?.hide()
+            }),
         textStyle = MaterialTheme.typography.labelMedium.copy(color = Color.White),
         keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation
@@ -121,9 +136,11 @@ fun SearchTextField(
     leadingIconTint: Color? = null,
     trailingIcon: Painter? = null,
     trailingIconTint: Color? = null,
-    trailingIconAction: () -> Unit = {}
+    trailingIconAction: () -> Unit = {},
+    onDoneAction: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     BasicTextField(
         value = value() ?: "",
@@ -135,6 +152,11 @@ fun SearchTextField(
                 interactionSource = interactionSource, indication = null
             ) { onFocused() },
         singleLine = true,
+        keyboardActions = KeyboardActions(
+            onDone = {
+                onDoneAction()
+                keyboardController?.hide()
+            }),
         textStyle = MaterialTheme.typography.labelMedium.copy(color = Color.White),
         keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation,

@@ -30,4 +30,23 @@
     <dimen name="hint_card_icon_inner_padding">12dp</dimen>
     <dimen name="search_screen_hints_padding_top">24dp</dimen>
     <dimen name="hint_card_text_padding_top">8dp</dimen>
+    <dimen name="specsearch_bar_padding_top">47dp</dimen>
+    <dimen name="ticket_offer_circle_size">24dp</dimen>
+    <dimen name="ticket_offers_item_padding_top">8dp</dimen>
+    <dimen name="ticket_offers_item_padding_circle">8dp</dimen>
+    <dimen name="ticket_offers_item_padding_schedule_top">4dp</dimen>
+    <dimen name="ticket_offer_items_padding">8dp</dimen>
+    <dimen name="ticket_offers_item_padding_schedule_bottom">10dp</dimen>
+    <dimen name="ticket_offer_button_radius">8dp</dimen>
+    <dimen name="ticket_offer_button_top_padding">23dp</dimen>
+    <dimen name="small_button_radius">50dp</dimen>
+    <dimen name="small_button_icon_padding">8dp</dimen>
+    <dimen name="small_button_padding_horizontal">10dp</dimen>
+    <dimen name="small_button_padding_vertical">8dp</dimen>
+    <dimen name="ticket_offer_small_button_space_between">8dp</dimen>
+    <dimen name="ticket_offer_small_button_top_padding">13dp</dimen>
+    <dimen name="ticket_offers_section_top">12dp</dimen>
+    <dimen name="ticket_offer_subscribe_section_radius">8dp</dimen>
+    <dimen name="ticket_offer_subscribe_section_horizontal_padding">16dp</dimen>
+    <dimen name="ticket_offer_small_button_icon_size">16dp</dimen>
 </resources>

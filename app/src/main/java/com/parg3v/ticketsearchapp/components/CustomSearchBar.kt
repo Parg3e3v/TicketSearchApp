@@ -1,8 +1,9 @@
 package com.parg3v.ticketsearchapp.components
 
 import android.content.Context
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,11 +11,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -35,6 +37,8 @@ fun CustomSearchBar(
     toFieldStateProvider: () -> String,
     toFieldInputChange: (String) -> Unit,
     startIcon: Painter? = null,
+    startIconTint: Color = Black,
+    startIconAction: () -> Unit = {},
     onToFocused: () -> Unit = {},
     leadingIconFrom: Painter? = null,
     trailingIconFrom: Painter? = null,
@@ -44,12 +48,16 @@ fun CustomSearchBar(
     trailingIconFromTint: Color? = null,
     leadingIconToTint: Color? = null,
     trailingIconToTint: Color? = null,
-    isFromClickable: Boolean = false,
+    isToFieldEnabled: Boolean = true,
+    isFromFieldEnabled: Boolean = true,
     trailingIconFromAction: () -> Unit = {},
-    trailingIconToAction: () -> Unit = {}
+    trailingIconToAction: () -> Unit = {},
+    onFromFieldDoneAction: () -> Unit = {},
+    onToFieldDoneAction: () -> Unit = {}
 ) {
 
     val context = LocalContext.current
+    val interactionSource = remember { MutableInteractionSource() }
 
     Row(
         modifier = modifier
@@ -67,10 +75,13 @@ fun CustomSearchBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         startIcon?.let {
-            Image(
+            Icon(
                 painter = startIcon,
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(color = Black),
+                tint = startIconTint,
+                modifier = Modifier.clickable(
+                    interactionSource = interactionSource, indication = null
+                ) { startIconAction() }
             )
         }
 
@@ -87,7 +98,10 @@ fun CustomSearchBar(
                 leadingIconTint = leadingIconFromTint,
                 trailingIcon = trailingIconFrom,
                 trailingIconTint = trailingIconFromTint,
-                trailingIconAction = trailingIconFromAction
+                trailingIconAction = trailingIconFromAction,
+                onDoneAction = onFromFieldDoneAction,
+                onFocused = onToFocused,
+                enabled = isFromFieldEnabled
             )
             Spacer(
                 modifier = Modifier
@@ -96,28 +110,20 @@ fun CustomSearchBar(
                     .background(Grey5)
             )
 
-            if (isFromClickable) {
-                SearchTextField(
-                    value = toFieldStateProvider,
-                    onValueChange = toFieldInputChange,
-                    placeholder = stringResource(R.string.where_to_placeholder),
-                    modifier = Modifier.fillMaxWidth(),
-                    onFocused = onToFocused,
-                    enabled = false
-                )
-            } else {
-                SearchTextField(
-                    value = toFieldStateProvider,
-                    onValueChange = toFieldInputChange,
-                    placeholder = stringResource(R.string.where_to_placeholder),
-                    modifier = Modifier.fillMaxWidth(),
-                    leadingIcon = leadingIconTo,
-                    leadingIconTint = leadingIconToTint,
-                    trailingIcon = trailingIconTo,
-                    trailingIconTint = trailingIconToTint,
-                    trailingIconAction = trailingIconToAction
-                )
-            }
+            SearchTextField(
+                value = toFieldStateProvider,
+                onValueChange = toFieldInputChange,
+                placeholder = stringResource(R.string.where_to_placeholder),
+                modifier = Modifier.fillMaxWidth(),
+                leadingIcon = leadingIconTo,
+                leadingIconTint = leadingIconToTint,
+                trailingIcon = trailingIconTo,
+                trailingIconTint = trailingIconToTint,
+                trailingIconAction = trailingIconToAction,
+                onDoneAction = onToFieldDoneAction,
+                onFocused = onToFocused,
+                enabled = isToFieldEnabled
+            )
         }
     }
 }
@@ -130,6 +136,6 @@ private fun Preview() {
         fromFieldInputChange = { _, _ -> },
         toFieldStateProvider = { "" },
         toFieldInputChange = { },
-        startIcon = painterResource(id = R.drawable.search_icon)
+        startIcon = painterResource(id = R.drawable.search_icon),
     )
 }

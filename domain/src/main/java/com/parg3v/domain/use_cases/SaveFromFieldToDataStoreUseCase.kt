@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
 
-class SaveFromFieldToDataStore {
+class SaveFromFieldToDataStoreUseCase {
     operator fun invoke(context: Context, value: String): Flow<Result<String, RootError>> = flow {
         try {
             emit(Result.Loading())
