@@ -1,9 +1,11 @@
 package com.parg3v.ticketsearchapp.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -21,6 +23,12 @@ fun LoadScaffold(
 
     val fromFieldValue by airlineTicketsViewModel.fromFieldState.collectAsStateWithLifecycle()
     val toFieldValue by airlineTicketsViewModel.toFieldState.collectAsStateWithLifecycle()
+    val offersState by airlineTicketsViewModel.offersState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        airlineTicketsViewModel.getFromFieldValue(context = context)
+    }
 
 
     CustomScaffold(
@@ -38,7 +46,8 @@ fun LoadScaffold(
             showBottomSheet = showBottomSheet,
             airlineTicketsViewModel = airlineTicketsViewModel,
             toFieldStateProvider = { toFieldValue },
-            fromFieldStateProvider = { fromFieldValue.data }
+            fromFieldStateProvider = { fromFieldValue.data },
+            offersStateProvider = { offersState }
         )
     }
 }

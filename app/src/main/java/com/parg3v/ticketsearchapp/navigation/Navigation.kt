@@ -1,6 +1,5 @@
 package com.parg3v.ticketsearchapp.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -10,22 +9,18 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
-import androidx.navigation.navArgument
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.parg3v.ticketsearchapp.model.OffersState
 import com.parg3v.ticketsearchapp.view.airlineTickets.AirlineTicketsScreen
 import com.parg3v.ticketsearchapp.view.airlineTickets.AirlineTicketsViewModel
 import com.parg3v.ticketsearchapp.view.todoScreen.ToDoScreen
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Navigation(
     navController: NavHostController,
@@ -33,7 +28,8 @@ fun Navigation(
     showBottomSheet: MutableState<Boolean>,
     airlineTicketsViewModel: AirlineTicketsViewModel,
     toFieldStateProvider: () -> String,
-    fromFieldStateProvider: () -> String?
+    fromFieldStateProvider: () -> String?,
+    offersStateProvider: () -> OffersState
 ) {
 
 
@@ -59,15 +55,8 @@ fun Navigation(
             popEnterTransition = { slideIn },
             exitTransition = { slideOut }
         ) {
-            val offersState by airlineTicketsViewModel.offersState.collectAsStateWithLifecycle()
-            val context = LocalContext.current
-
-            LaunchedEffect(Unit) {
-                airlineTicketsViewModel.getFromFieldValue(context = context)
-            }
-
             AirlineTicketsScreen(
-                offersStateProvider = { offersState },
+                offersStateProvider = offersStateProvider,
                 fromFieldStateProvider = fromFieldStateProvider,
                 fromFieldInputChange = airlineTicketsViewModel::validateFromField,
                 toFieldStateProvider = toFieldStateProvider,

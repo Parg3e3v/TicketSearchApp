@@ -30,7 +30,18 @@ fun BottomNavigationBar(
         containerColor = Black
     ) {
         items.forEach { item ->
-            val selected = item.route == backStackEntry.value?.destination?.route
+
+            val route = backStackEntry.value?.destination?.route
+
+            val currentRoute = if (route != null && route.contains("/{title}")) {
+                val title = backStackEntry.value?.arguments?.getString("title")
+                route.replace("/{title}", "") + "/" + title
+            } else {
+                route
+            }
+
+            val selected = item.route == currentRoute
+
             NavigationBarItem(
                 selected = selected,
                 onClick = { onItemClick(item) },

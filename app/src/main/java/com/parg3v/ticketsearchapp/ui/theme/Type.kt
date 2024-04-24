@@ -36,7 +36,7 @@ val Typography = Typography(
     ),
     labelMedium = TextStyle(                 /* Button Text */
         fontSize = 16.sp,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
     ),
     labelSmall = TextStyle(                  /* Tab text */
         fontSize = 10.sp

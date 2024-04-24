@@ -90,6 +90,7 @@ fun AirlineTicketsScreen(
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.offer_card_space_between)),
             modifier = Modifier.padding(top = dimensionResource(id = R.dimen.offer_cards_section_top_padding))
         ) {
+            // TODO: SHIMMER
             offersStateProvider().data?.let { list ->
                 items(list) { offer ->
                     OfferCard(image = offerImages[offer.id - 1], offer = offer)
