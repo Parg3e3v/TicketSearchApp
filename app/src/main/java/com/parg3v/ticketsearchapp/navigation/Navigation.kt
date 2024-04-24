@@ -56,7 +56,7 @@ fun Navigation(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.SpecificSearchScreen.route,
+        startDestination = Screen.AirlineTicketsScreen.route,
         modifier = Modifier.padding(paddingValues = paddingValues)
     ) {
         composable(

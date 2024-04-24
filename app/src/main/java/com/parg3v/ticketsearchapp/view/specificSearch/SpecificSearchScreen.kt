@@ -69,7 +69,7 @@ fun SpecificSearchScreen(
     var showDatePicker by remember { mutableStateOf(false) }
     var showDatePickerBack by remember { mutableStateOf(false) }
     var date by remember { mutableStateOf(Calendar.getInstance().time) }
-    val dateSplit = dateFormat.format(date).replace(".", "").split(",")
+    val dateSplit = dateFormat.format(date).split(".")
 
     val styledText = buildAnnotatedString {
         withStyle(

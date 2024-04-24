@@ -41,6 +41,6 @@ val Typography = Typography(
         fontWeight = FontWeight.SemiBold
     ),
     labelSmall = TextStyle(                  /* Tab text */
-        fontSize = 10.sp
+        fontSize = 9.sp // some screens need NavBarItems to be smaller
     )
 )
