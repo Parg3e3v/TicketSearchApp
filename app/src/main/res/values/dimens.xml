@@ -39,7 +39,7 @@
     <dimen name="ticket_offers_item_padding_schedule_bottom">10dp</dimen>
     <dimen name="ticket_offer_button_radius">8dp</dimen>
     <dimen name="ticket_offer_button_top_padding">23dp</dimen>
-    <dimen name="small_button_radius">50dp</dimen>
+    <dimen name="common_button_radius">50dp</dimen>
     <dimen name="small_button_icon_padding">8dp</dimen>
     <dimen name="small_button_padding_horizontal">10dp</dimen>
     <dimen name="small_button_padding_vertical">8dp</dimen>
@@ -49,4 +49,25 @@
     <dimen name="ticket_offer_subscribe_section_radius">8dp</dimen>
     <dimen name="ticket_offer_subscribe_section_horizontal_padding">16dp</dimen>
     <dimen name="ticket_offer_small_button_icon_size">16dp</dimen>
+    <dimen name="ticket_item_corner_radius">8dp</dimen>
+    <dimen name="ticket_item_from_start_padding">8dp</dimen>
+    <dimen name="ticket_item_date_top_padding">4dp</dimen>
+    <dimen name="ticket_item_divider_start_padding">2dp</dimen>
+    <dimen name="ticket_item_divider_end_padding">4dp</dimen>
+    <dimen name="ticket_item_add_info_start_padding">13dp</dimen>
+    <dimen name="ticket_item_info_from_price_padding">16dp</dimen>
+    <dimen name="ticket_screen_tickets_padding">16dp</dimen>
+    <dimen name="ticket_item_card_badge_padding">8dp</dimen>
+    <dimen name="ticket_item_badge_horizontal_padding">10dp</dimen>
+    <dimen name="ticket_item_badge_vertical_padding">2dp</dimen>
+    <dimen name="ticket_item_price_top_padding">5dp</dimen>
+    <dimen name="ticket_screen_top_bar_inner_padding">8dp</dimen>
+    <dimen name="ticket_screen_top_bar_text_start_padding">8dp</dimen>
+    <dimen name="ticket_screen_top_padding">16dp</dimen>
+    <dimen name="ticket_screen_top_bar_bottom_padding">10dp</dimen>
+    <dimen name="ticket_screen_top_bar_subtitle_top_padding">4dp</dimen>
+    <dimen name="ticket_screen_bottom_bar_text_padding_start">4dp</dimen>
+    <dimen name="ticket_screen_bottom_bar_section_padding">16dp</dimen>
+    <dimen name="ticket_screen_bottom_bar_section_inner_padding">10dp</dimen>
+    <dimen name="ticket_screen_bottom_bar_section_bottom_padding">16dp</dimen>
 </resources>

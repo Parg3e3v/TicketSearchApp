@@ -36,7 +36,7 @@ fun SmallButton(
         modifier = modifier
             .background(
                 color = Grey3,
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.small_button_radius))
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.common_button_radius))
             )
             .clickable(interactionSource = interactionSource, indication = null) { onClick() }
     ) {
@@ -77,7 +77,7 @@ fun SmallButton(
         modifier = modifier
             .background(
                 color = Grey3,
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.small_button_radius))
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.common_button_radius))
             )
             .clickable(interactionSource = interactionSource, indication = null) { onClick() }
     ) {

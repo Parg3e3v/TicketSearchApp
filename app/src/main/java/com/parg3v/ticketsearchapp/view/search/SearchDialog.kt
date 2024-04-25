@@ -26,6 +26,7 @@ import com.parg3v.ticketsearchapp.components.HintCard
 import com.parg3v.ticketsearchapp.components.RecommendedPlaceCard
 import com.parg3v.ticketsearchapp.model.HintItem
 import com.parg3v.ticketsearchapp.model.RecommendedPlaceItem
+import com.parg3v.ticketsearchapp.navigateAndClose
 import com.parg3v.ticketsearchapp.navigation.Screen
 import com.parg3v.ticketsearchapp.ui.theme.Blue
 import com.parg3v.ticketsearchapp.ui.theme.DarkBlue
@@ -34,8 +35,6 @@ import com.parg3v.ticketsearchapp.ui.theme.Grey3
 import com.parg3v.ticketsearchapp.ui.theme.Grey6
 import com.parg3v.ticketsearchapp.ui.theme.Grey7
 import com.parg3v.ticketsearchapp.ui.theme.Red
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @Composable
 fun SearchScreen(
@@ -174,17 +173,5 @@ fun SearchScreen(
                     })
             }
         }
-    }
-}
-
-fun navigateAndClose(
-    scope: CoroutineScope,
-    navController: NavController,
-    closeBottomSheet: suspend () -> Unit,
-    route: String
-) {
-    navController.navigate(route)
-    scope.launch {
-        closeBottomSheet()
     }
 }

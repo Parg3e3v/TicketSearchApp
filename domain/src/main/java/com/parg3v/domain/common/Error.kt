@@ -9,6 +9,9 @@ enum class OfferError: Error {
 enum class TicketOfferError: Error {
     BASIC
 }
+enum class TicketError: Error {
+    BASIC
+}
 
 enum class FieldFromError: Error {
     BASIC

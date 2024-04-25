@@ -66,10 +66,12 @@ fun SpecificSearchScreen(
 
     val datePickerState = rememberDatePickerState()
     val dateFormat = SimpleDateFormat("dd MMM, E", Locale("ru", "RU"))
+    val dateFormatToPass = SimpleDateFormat("dd MMMM", Locale("ru", "RU"))
     var showDatePicker by remember { mutableStateOf(false) }
     var showDatePickerBack by remember { mutableStateOf(false) }
     var date by remember { mutableStateOf(Calendar.getInstance().time) }
     val dateSplit = dateFormat.format(date).split(".")
+
 
     val styledText = buildAnnotatedString {
         withStyle(
@@ -196,7 +198,16 @@ fun SpecificSearchScreen(
                 .padding(top = dimensionResource(id = R.dimen.ticket_offer_button_top_padding))
                 .fillMaxWidth()
                 .aspectRatio(7.8F),
-            onClick = { navController.navigate(Screen.TicketsScreen.route) },
+            onClick = {
+                navController.navigate(
+                    Screen.TicketsScreen.withArgs(
+                        dateFormatToPass.format(date),
+                        "1 пассажир",
+                        fromFieldStateProvider() ?: "",
+                        toFieldStateProvider()
+                    )
+                )
+            },
             colors = ButtonColors(
                 containerColor = Blue,
                 contentColor = Color.White,

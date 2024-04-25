@@ -2,8 +2,10 @@ package com.parg3v.data.di.module
 
 import com.parg3v.data.repository.OffersRepositoryImpl
 import com.parg3v.data.repository.TicketOffersRepositoryImpl
+import com.parg3v.data.repository.TicketsRepositoryImpl
 import com.parg3v.domain.repository.OffersRepository
 import com.parg3v.domain.repository.TicketOffersRepository
+import com.parg3v.domain.repository.TicketsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -25,4 +27,10 @@ abstract class RepositoryModules {
     abstract fun bindTicketOffersRepository(
         repository: TicketOffersRepositoryImpl
     ): TicketOffersRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTicketsRepository(
+        repository: TicketsRepositoryImpl
+    ): TicketsRepository
 }

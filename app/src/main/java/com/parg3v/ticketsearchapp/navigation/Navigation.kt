@@ -26,6 +26,7 @@ import com.parg3v.ticketsearchapp.view.airlineTickets.AirlineTicketsViewModel
 import com.parg3v.ticketsearchapp.view.specificSearch.SpecificSearchScreen
 import com.parg3v.ticketsearchapp.view.specificSearch.SpecificSearchViewModel
 import com.parg3v.ticketsearchapp.view.tickets.TicketsScreen
+import com.parg3v.ticketsearchapp.view.tickets.TicketsViewModel
 import com.parg3v.ticketsearchapp.view.todoScreen.ToDoScreen
 
 @Composable
@@ -41,6 +42,7 @@ fun Navigation(
 
     val airlineTicketsViewModel: AirlineTicketsViewModel = hiltViewModel()
     val specificSearchViewModel: SpecificSearchViewModel = hiltViewModel()
+    val ticketsViewModel: TicketsViewModel = hiltViewModel()
 
     val slideIn = slideInHorizontally(
         initialOffsetX = { -300 }, animationSpec = tween(
@@ -96,11 +98,50 @@ fun Navigation(
             )
         }
         composable(
-            route = Screen.TicketsScreen.route,
+            route = "${Screen.TicketsScreen.route}/{date}/{passengers}/{from}/{to}",
+            arguments = listOf(
+                navArgument("date") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                    nullable = false
+                },
+                navArgument("passengers") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                    nullable = false
+                },
+                navArgument("from") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                    nullable = false
+                },
+                navArgument("to") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                    nullable = false
+                },
+            ),
             popEnterTransition = { slideIn },
             exitTransition = { slideOut }
-        ) {
-            TicketsScreen()
+        ) { entry ->
+            val date = entry.arguments?.getString("date") ?: ""
+            val passengers = entry.arguments?.getString("passengers") ?: ""
+            val from = entry.arguments?.getString("from") ?: ""
+            val to = entry.arguments?.getString("to") ?: ""
+            val ticketsState by ticketsViewModel.ticketsState.collectAsStateWithLifecycle()
+
+            LaunchedEffect(ticketsViewModel) {
+                ticketsViewModel.getAllTickets()
+            }
+
+            TicketsScreen(
+                navController = navController,
+                ticketsState = ticketsState,
+                dateProvider = { date },
+                passengersProvider = { passengers },
+                fromProvider = { from },
+                toProvider = { to }
+            )
         }
         composable(route = "${Screen.ToDoScreen.route}/{title}",
             arguments = listOf(navArgument("title") {

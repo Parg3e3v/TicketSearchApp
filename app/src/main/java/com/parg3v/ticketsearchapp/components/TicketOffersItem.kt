@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.parg3v.domain.model.Price
 import com.parg3v.domain.model.TicketOffer
 import com.parg3v.ticketsearchapp.R
+import com.parg3v.ticketsearchapp.formatWithThousandSeparator
 import com.parg3v.ticketsearchapp.ui.theme.Blue
 import com.parg3v.ticketsearchapp.ui.theme.Grey4
 import com.parg3v.ticketsearchapp.ui.theme.Red
@@ -49,7 +50,7 @@ fun TicketOffersItem(modifier: Modifier = Modifier, item: TicketOffer, circleCol
                     )
                     Text(
                         text = stringResource(
-                            R.string.ticket_offer_price,
+                            R.string.ticket_price,
                             formatWithThousandSeparator(item.price.value)
                         ),
                         style = MaterialTheme.typography.headlineMedium.copy(color = Blue)

@@ -10,12 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.Dp
 import com.parg3v.ticketsearchapp.R
 import com.parg3v.ticketsearchapp.ui.theme.Grey3
 
 @Composable
 fun RoundedBackgroundWithPadding(
     modifier: Modifier = Modifier,
+    cornerRadius: Dp = dimensionResource(id = R.dimen.from_to_where_search_radius),
     backgroundColor: Color = Grey3,
     content: @Composable() (BoxScope.() -> Unit)
 ) {
@@ -25,7 +27,7 @@ fun RoundedBackgroundWithPadding(
             .fillMaxWidth()
             .background(
                 color = backgroundColor, shape = RoundedCornerShape(
-                    dimensionResource(id = R.dimen.from_to_where_search_radius)
+                    cornerRadius
                 )
             )
             .padding(dimensionResource(id = R.dimen.from_to_where_search_inner_padding)),

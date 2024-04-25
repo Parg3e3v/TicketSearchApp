@@ -1,6 +1,5 @@
 package com.parg3v.ticketsearchapp.components
 
-import android.icu.text.NumberFormat
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,8 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.parg3v.domain.model.Offer
 import com.parg3v.domain.model.Price
 import com.parg3v.ticketsearchapp.R
+import com.parg3v.ticketsearchapp.formatWithThousandSeparator
 import com.parg3v.ticketsearchapp.ui.theme.Grey6
-import java.util.Locale
 
 @Composable
 fun OfferCard(modifier: Modifier = Modifier, image: Painter, offer: Offer) {
@@ -66,19 +65,13 @@ fun OfferCard(modifier: Modifier = Modifier, image: Painter, offer: Offer) {
             )
             Text(
                 text = stringResource(
-                    R.string.ticket_price,
+                    R.string.ticket_airline_price,
                     formatWithThousandSeparator(offer.price.value)
                 ),
                 style = MaterialTheme.typography.bodyMedium
             )
         }
     }
-}
-
-fun formatWithThousandSeparator(value: Int): String {
-    val numberFormat = NumberFormat.getNumberInstance(Locale.getDefault())
-    val formattedString = numberFormat.format(value)
-    return formattedString.replace(",", " ")
 }
 
 @Preview
