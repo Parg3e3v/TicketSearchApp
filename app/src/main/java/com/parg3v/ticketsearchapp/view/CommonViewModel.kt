@@ -30,8 +30,10 @@ class CommonViewModel @Inject constructor(
     val toFieldState: StateFlow<String> = _toFieldState.asStateFlow()
 
     fun validateFromField(input: String, context: Context) {
-        if (validateCyrillicTextUseCase(input)) saveFromFieldValue(context = context, input)
-        _fromFieldState.update { FromFieldState(data = input) }
+        if (validateCyrillicTextUseCase(input)) {
+            saveFromFieldValue(context = context, input)
+            _fromFieldState.update { FromFieldState(data = input) }
+        }
     }
 
     fun validateToField(input: String) {

@@ -23,4 +23,6 @@
     <string name="flight_duration">%1$sч в пути</string>
     <string name="no_transfer">Без пересадок</string>
     <string name="prices_graph">График цен</string>
+    <string name="filter">Фильтр</string>
+    <string name="no_data_error">Данные для ввода не верны</string>
 </resources>

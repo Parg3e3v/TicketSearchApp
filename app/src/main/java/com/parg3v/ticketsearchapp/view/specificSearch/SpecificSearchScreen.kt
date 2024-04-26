@@ -199,14 +199,21 @@ fun SpecificSearchScreen(
                 .fillMaxWidth()
                 .aspectRatio(7.8F),
             onClick = {
-                navController.navigate(
-                    Screen.TicketsScreen.withArgs(
-                        dateFormatToPass.format(date),
-                        "1 пассажир",
-                        fromFieldStateProvider() ?: "",
-                        toFieldStateProvider()
+                if (toFieldStateProvider().isNotBlank() && !fromFieldStateProvider().isNullOrBlank()) {
+                    navController.navigate(
+                        Screen.TicketsScreen.withArgs(
+                            dateFormatToPass.format(date),
+                            "1 пассажир",
+                            fromFieldStateProvider() ?: "",
+                            toFieldStateProvider()
+                        )
                     )
-                )
+                } else {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.no_data_error), Toast.LENGTH_SHORT
+                    ).show()
+                }
             },
             colors = ButtonColors(
                 containerColor = Blue,

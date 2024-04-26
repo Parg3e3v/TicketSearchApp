@@ -63,7 +63,7 @@ fun TicketsScreen(
                     )
                     Column(modifier = Modifier.padding(start = dimensionResource(id = R.dimen.ticket_screen_top_bar_text_start_padding))) {
                         Text(
-                            text = "${fromProvider()}-${toProvider()}",
+                            text = "${fromProvider().trimEnd()}-${toProvider().trimEnd()}",
                             style = MaterialTheme.typography.titleSmall
                         )
                         Text(
@@ -104,7 +104,7 @@ fun TicketsScreen(
             )
             Text(
                 modifier = Modifier.padding(start = dimensionResource(id = R.dimen.ticket_screen_bottom_bar_text_padding_start)),
-                text = stringResource(id = R.string.filters),
+                text = stringResource(id = R.string.filter),
                 style = MaterialTheme.typography.headlineMedium
             )
             Icon(
