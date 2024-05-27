@@ -24,12 +24,6 @@ fun LoadScaffold(
     val fromFieldValue by commonViewModel.fromFieldState.collectAsStateWithLifecycle()
     val toFieldValue by commonViewModel.toFieldState.collectAsStateWithLifecycle()
 
-    val context = LocalContext.current
-
-    LaunchedEffect(Unit) {
-        commonViewModel.getFromFieldValue(context = context)
-    }
-
 
     CustomScaffold(
         modifier = modifier,

@@ -40,7 +40,7 @@ import com.parg3v.ticketsearchapp.ui.theme.Red
 fun SearchScreen(
     navController: NavController,
     fromFieldStateProvider: () -> String?,
-    fromFieldInputChange: (String, Context) -> Unit,
+    fromFieldInputChange: (String) -> Unit,
     toFieldStateProvider: () -> String,
     toFieldInputChange: (String) -> Unit,
     closeBottomSheet: suspend () -> Unit

@@ -1,6 +1,5 @@
 package com.parg3v.ticketsearchapp.view
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.parg3v.domain.common.Result
@@ -29,9 +28,13 @@ class CommonViewModel @Inject constructor(
     private val _toFieldState = MutableStateFlow(String())
     val toFieldState: StateFlow<String> = _toFieldState.asStateFlow()
 
-    fun validateFromField(input: String, context: Context) {
+    init {
+        getFromFieldValue()
+    }
+
+    fun validateFromField(input: String) {
         if (validateCyrillicTextUseCase(input)) {
-            saveFromFieldValue(context = context, input)
+            saveFromFieldValue(input)
             _fromFieldState.update { FromFieldState(data = input) }
         }
     }
@@ -40,12 +43,20 @@ class CommonViewModel @Inject constructor(
         if (validateCyrillicTextUseCase(input)) _toFieldState.update { input }
     }
 
-    suspend fun getFromFieldValue(context: Context) {
-        _fromFieldState.value = FromFieldState(data = getFromFieldFromDataStoreUseCase(context))
+    private fun getFromFieldValue() {
+        getFromFieldFromDataStoreUseCase().onEach { result ->
+            when (result) {
+                is Result.Error -> _fromFieldState.value = FromFieldState(error = result.error)
+                is Result.Loading -> _fromFieldState.value = FromFieldState(isLoading = true)
+                is Result.Success -> _fromFieldState.value = FromFieldState(data = result.data)
+            }
+        }
+
     }
-    private fun saveFromFieldValue(context: Context, value: String) {
+
+    private fun saveFromFieldValue(value: String) {
         saveFromFieldToDataStoreUseCase(
-            context = context, value = value
+            value = value
         ).onEach { result ->
             when (result) {
                 is Result.Error -> {

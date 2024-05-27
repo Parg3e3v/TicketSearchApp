@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,7 +32,7 @@ import com.parg3v.ticketsearchapp.ui.theme.Grey5
 fun CustomSearchBar(
     modifier: Modifier = Modifier,
     fromFieldValueProvider: () -> String?,
-    fromFieldInputChange: (String, Context) -> Unit,
+    fromFieldInputChange: (String) -> Unit,
     toFieldStateProvider: () -> String,
     toFieldInputChange: (String) -> Unit,
     startIcon: Painter? = null,
@@ -56,7 +55,6 @@ fun CustomSearchBar(
     onToFieldDoneAction: () -> Unit = {}
 ) {
 
-    val context = LocalContext.current
     val interactionSource = remember { MutableInteractionSource() }
 
     Row(
@@ -92,7 +90,6 @@ fun CustomSearchBar(
                 value = fromFieldValueProvider,
                 onValueChange = fromFieldInputChange,
                 placeholder = stringResource(R.string.where_from_placeholder),
-                context = context,
                 modifier = Modifier.fillMaxWidth(),
                 leadingIcon = leadingIconFrom,
                 leadingIconTint = leadingIconFromTint,
@@ -133,7 +130,7 @@ fun CustomSearchBar(
 private fun Preview() {
     CustomSearchBar(
         fromFieldValueProvider = { "" },
-        fromFieldInputChange = { _, _ -> },
+        fromFieldInputChange = { _ -> },
         toFieldStateProvider = { "" },
         toFieldInputChange = { },
         startIcon = painterResource(id = R.drawable.search_icon),

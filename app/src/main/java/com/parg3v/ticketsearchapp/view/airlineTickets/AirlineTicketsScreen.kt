@@ -1,6 +1,5 @@
 package com.parg3v.ticketsearchapp.view.airlineTickets
 
-import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,7 +30,7 @@ import com.parg3v.ticketsearchapp.ui.theme.TicketSearchAppTheme
 fun AirlineTicketsScreen(
     offersStateProvider: () -> OffersState,
     fromFieldStateProvider: () -> String?,
-    fromFieldInputChange: (String, Context) -> Unit,
+    fromFieldInputChange: (String) -> Unit,
     toFieldStateProvider: () -> String,
     toFieldInputChange: (String) -> Unit,
     showBottomSheet: MutableState<Boolean> = mutableStateOf(false)
@@ -95,6 +94,6 @@ fun AirlineTicketsScreen(
 @Composable
 private fun Preview() {
     TicketSearchAppTheme {
-        AirlineTicketsScreen({ OffersState() }, { "" }, { _, _ -> }, { "" }, { })
+        AirlineTicketsScreen({ OffersState() }, { "" }, { _ -> }, { "" }, { })
     }
 }

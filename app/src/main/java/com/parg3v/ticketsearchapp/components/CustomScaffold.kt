@@ -32,7 +32,7 @@ fun CustomScaffold(
     ),
     showBottomSheet: MutableState<Boolean>,
     fromFieldStateProvider: () -> String?,
-    fromFieldInputChange: (String, Context) -> Unit,
+    fromFieldInputChange: (String) -> Unit,
     toFieldStateProvider: () -> String,
     toFieldInputChange: (String) -> Unit,
     content: @Composable (paddingValues: PaddingValues) -> Unit

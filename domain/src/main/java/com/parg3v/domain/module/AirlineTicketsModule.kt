@@ -1,5 +1,6 @@
 package com.parg3v.domain.module
 
+import com.parg3v.domain.repository.DataStoreRepository
 import com.parg3v.domain.use_cases.GetFromFieldFromDataStoreUseCase
 import com.parg3v.domain.use_cases.SaveFromFieldToDataStoreUseCase
 import com.parg3v.domain.use_cases.ValidateCyrillicTextUseCase
@@ -15,14 +16,14 @@ object AirlineTicketsModule {
 
     @Provides
     @Singleton
-    fun provideSaveFromFieldToDataStoreUseCase(): SaveFromFieldToDataStoreUseCase {
-        return SaveFromFieldToDataStoreUseCase()
+    fun provideSaveFromFieldToDataStoreUseCase(dataStoreRepository: DataStoreRepository): SaveFromFieldToDataStoreUseCase {
+        return SaveFromFieldToDataStoreUseCase(dataStoreRepository)
     }
 
     @Provides
     @Singleton
-    fun provideGetFromFieldFromDataStoreUseCase(): GetFromFieldFromDataStoreUseCase {
-        return GetFromFieldFromDataStoreUseCase()
+    fun provideGetFromFieldFromDataStoreUseCase(dataStoreRepository: DataStoreRepository): GetFromFieldFromDataStoreUseCase {
+        return GetFromFieldFromDataStoreUseCase(dataStoreRepository)
     }
 
     @Provides

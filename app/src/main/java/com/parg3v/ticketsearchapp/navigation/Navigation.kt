@@ -1,6 +1,5 @@
 package com.parg3v.ticketsearchapp.navigation
 
-import android.content.Context
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -37,7 +36,7 @@ fun Navigation(
     toFieldStateProvider: () -> String,
     toFieldInputChange: (String) -> Unit,
     fromFieldStateProvider: () -> String?,
-    fromFieldInputChange: (String, Context) -> Unit
+    fromFieldInputChange: (String) -> Unit
 ) {
 
     val airlineTicketsViewModel: AirlineTicketsViewModel = hiltViewModel()

@@ -56,7 +56,7 @@ import java.util.Locale
 fun SpecificSearchScreen(
     navController: NavController,
     fromFieldStateProvider: () -> String?,
-    fromFieldInputChange: (String, Context) -> Unit,
+    fromFieldInputChange: (String) -> Unit,
     toFieldStateProvider: () -> String,
     toFieldInputChange: (String) -> Unit,
     ticketOffersState: TicketOffersState
@@ -153,7 +153,7 @@ fun SpecificSearchScreen(
             trailingIconToTint = Grey7,
             trailingIconFromAction = {
                 val fromFieldCurrentText = fromFieldStateProvider() ?: ""
-                fromFieldInputChange(toFieldStateProvider(), context)
+                fromFieldInputChange(toFieldStateProvider())
                 toFieldInputChange(fromFieldCurrentText)
             },
             trailingIconToAction = { toFieldInputChange("") }

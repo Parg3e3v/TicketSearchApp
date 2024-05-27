@@ -1,4 +1,4 @@
-package com.parg3v.domain.serializer
+package com.parg3v.data.serializer
 
 import androidx.datastore.core.Serializer
 import kotlinx.coroutines.Dispatchers
@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 
-object FieldFromSerializer: Serializer<String> {
+object FieldFromSerializer : Serializer<String> {
     override val defaultValue: String
         get() = "Минск"
 

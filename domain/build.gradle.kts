@@ -48,8 +48,4 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
-
-    //Data Store
-    implementation (libs.androidx.datastore)
-    implementation (libs.kotlinx.serialization.json)
 }

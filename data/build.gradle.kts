@@ -55,4 +55,9 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+    //Data Store
+//    implementation (libs.androidx.datastore)
+    implementation (libs.androidx.datastore.preferences)
+    implementation (libs.kotlinx.serialization.json)
 }

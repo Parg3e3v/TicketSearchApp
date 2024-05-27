@@ -3,7 +3,7 @@ package com.parg3v.data.config
 object NetworkConfig {
     const val BASE_URL = "https://run.mocky.io"
 
-    const val PATH_OFFERS = "/v3/c7bde1a5-0b9f-4028-9f57-67a4b1606fe2"
-    const val PATH_OFFERS_TICKET = "/v3/8df2e1d0-3f3e-4842-aca2-ddc8b6ee7a5e"
-    const val PATH_TICKETS = "/v3/55e1d1f9-40d6-4edb-8be7-84927f76906b"
+    const val PATH_OFFERS = "/v3/214a1713-bac0-4853-907c-a1dfc3cd05fd"
+    const val PATH_OFFERS_TICKET = "/v3/7e55bf02-89ff-4847-9eb7-7d83ef884017"
+    const val PATH_TICKETS = "/v3/670c3d56-7f03-4237-9e34-d437a9e56ebf"
 }
