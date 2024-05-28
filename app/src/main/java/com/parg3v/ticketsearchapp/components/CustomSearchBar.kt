@@ -1,6 +1,5 @@
 package com.parg3v.ticketsearchapp.components
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

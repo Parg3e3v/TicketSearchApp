@@ -46,11 +46,19 @@ class CommonViewModel @Inject constructor(
     private fun getFromFieldValue() {
         getFromFieldFromDataStoreUseCase().onEach { result ->
             when (result) {
-                is Result.Error -> _fromFieldState.value = FromFieldState(error = result.error)
-                is Result.Loading -> _fromFieldState.value = FromFieldState(isLoading = true)
-                is Result.Success -> _fromFieldState.value = FromFieldState(data = result.data)
+                is Result.Error -> {
+                    _fromFieldState.value = FromFieldState(error = result.error)
+                }
+
+                is Result.Loading -> {
+                    _fromFieldState.value = FromFieldState(isLoading = true)
+                }
+
+                is Result.Success -> {
+                    _fromFieldState.value = FromFieldState(data = result.data)
+                }
             }
-        }
+        }.launchIn(viewModelScope)
 
     }
 

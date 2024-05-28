@@ -15,6 +15,7 @@
 
 ## Скриншоты
 
+<!--suppress ALL -->
 <img src="https://i.imgur.com/g0WpBHr.png" width="250">
 
 <img src="https://i.imgur.com/iLjIvM5.png" width="250">

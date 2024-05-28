@@ -15,7 +15,7 @@
     <dimen name="offer_card_price_icon_size">24dp</dimen>
     <dimen name="offer_card_space_between">67dp</dimen>
     <dimen name="offer_cards_section_top_padding">25dp</dimen>
-    <dimen name="search_text_field_text_padding_horizotnal">8dp</dimen>
+    <dimen name="search_text_field_text_padding_horizontal">8dp</dimen>
     <dimen name="search_screen_places_space">8dp</dimen>
     <dimen name="search_screen_places_padding_top">30dp</dimen>
     <dimen name="recommended_place_card_image_size">40dp</dimen>
@@ -46,8 +46,6 @@
     <dimen name="ticket_offer_small_button_space_between">8dp</dimen>
     <dimen name="ticket_offer_small_button_top_padding">13dp</dimen>
     <dimen name="ticket_offers_section_top">12dp</dimen>
-    <dimen name="ticket_offer_subscribe_section_radius">8dp</dimen>
-    <dimen name="ticket_offer_subscribe_section_horizontal_padding">16dp</dimen>
     <dimen name="ticket_offer_small_button_icon_size">16dp</dimen>
     <dimen name="ticket_item_corner_radius">8dp</dimen>
     <dimen name="ticket_item_from_start_padding">8dp</dimen>

@@ -1,6 +1,6 @@
 package com.parg3v.domain.use_cases
 
-import com.parg3v.domain.common.FieldToError
+import com.parg3v.domain.common.FieldFromError
 import com.parg3v.domain.common.Result
 import com.parg3v.domain.repository.DataStoreRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,13 +11,14 @@ import javax.inject.Inject
 class SaveFromFieldToDataStoreUseCase @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) {
-    operator fun invoke(value: String): Flow<Result<String, FieldToError>> = flow {
+    operator fun invoke(value: String): Flow<Result<String?, FieldFromError>> = flow {
         try {
             emit(Result.Loading())
-            val fieldValue = dataStoreRepository.setField(value)
+            dataStoreRepository.setField(value)
+            val fieldValue = dataStoreRepository.getField()
             emit(Result.Success(fieldValue))
-        }catch (e: IOException){
-            emit(Result.Error(FieldToError.BASIC))
+        } catch (e: IOException) {
+            emit(Result.Error(FieldFromError.BASIC))
         }
     }
 }

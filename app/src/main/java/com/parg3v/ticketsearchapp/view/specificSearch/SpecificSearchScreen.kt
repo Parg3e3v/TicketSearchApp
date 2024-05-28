@@ -1,6 +1,5 @@
 package com.parg3v.ticketsearchapp.view.specificSearch
 
-import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -86,7 +85,7 @@ fun SpecificSearchScreen(
                 color = Grey6,
             )
         ) {
-            append(dateSplit[1])
+            append(", ${dateSplit[1]}")
         }
     }
 

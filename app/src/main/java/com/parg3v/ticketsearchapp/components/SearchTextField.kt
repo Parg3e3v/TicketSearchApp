@@ -95,9 +95,9 @@ fun SearchTextField(
             interactionSource = interactionSource,
             contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(
                 0.dp,
-                dimensionResource(id = R.dimen.search_text_field_text_padding_horizotnal),
+                dimensionResource(id = R.dimen.search_text_field_text_padding_horizontal),
                 0.dp,
-                dimensionResource(id = R.dimen.search_text_field_text_padding_horizotnal)
+                dimensionResource(id = R.dimen.search_text_field_text_padding_horizontal)
             ),
             colors = TextFieldDefaults.colors(
                 unfocusedPlaceholderColor = Grey6,
@@ -186,9 +186,9 @@ fun SearchTextField(
             interactionSource = interactionSource,
             contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(
                 0.dp,
-                dimensionResource(id = R.dimen.search_text_field_text_padding_horizotnal),
+                dimensionResource(id = R.dimen.search_text_field_text_padding_horizontal),
                 0.dp,
-                dimensionResource(id = R.dimen.search_text_field_text_padding_horizotnal)
+                dimensionResource(id = R.dimen.search_text_field_text_padding_horizontal)
             ),
             colors = TextFieldDefaults.colors(
                 unfocusedPlaceholderColor = Grey6,

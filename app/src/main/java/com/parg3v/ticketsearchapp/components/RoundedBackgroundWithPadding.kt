@@ -19,7 +19,7 @@ fun RoundedBackgroundWithPadding(
     modifier: Modifier = Modifier,
     cornerRadius: Dp = dimensionResource(id = R.dimen.from_to_where_search_radius),
     backgroundColor: Color = Grey3,
-    content: @Composable() (BoxScope.() -> Unit)
+    content: @Composable (BoxScope.() -> Unit)
 ) {
 
     Box(

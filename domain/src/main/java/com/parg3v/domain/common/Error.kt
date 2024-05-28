@@ -16,7 +16,3 @@ enum class TicketError: Error {
 enum class FieldFromError: Error {
     BASIC
 }
-
-enum class FieldToError: Error {
-    BASIC
-}
