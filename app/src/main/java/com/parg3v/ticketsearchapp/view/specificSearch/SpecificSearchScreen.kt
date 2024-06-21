@@ -21,7 +21,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -31,6 +33,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -46,8 +49,10 @@ import com.parg3v.ticketsearchapp.ui.theme.Blue
 import com.parg3v.ticketsearchapp.ui.theme.Grey5
 import com.parg3v.ticketsearchapp.ui.theme.Grey6
 import com.parg3v.ticketsearchapp.ui.theme.Grey7
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,12 +72,24 @@ fun SpecificSearchScreen(
     val dateFormat = SimpleDateFormat("dd MMM, E", Locale("ru", "RU"))
     val dateFormatToPass = SimpleDateFormat("dd MMMM", Locale("ru", "RU"))
     var showDatePicker by remember { mutableStateOf(false) }
-    var showDatePickerBack by remember { mutableStateOf(false) }
     var date by remember { mutableStateOf(Calendar.getInstance().time) }
     val dateSplit = dateFormat.format(date).split(",")
+    val today = Calendar.getInstance()
+
+    val calendarF = Calendar.getInstance()
+    calendarF.time = date
+
+    val backDatePlaceholder = buildAnnotatedString { append(stringResource(R.string.back))}
+    val backDateText = remember { mutableStateOf(backDatePlaceholder) }
+    val hasBackDate = backDateText.value != backDatePlaceholder
+    val backDateStartIcon =
+        if (!hasBackDate) painterResource(id = R.drawable.plus_icon) else null
+    var dateBack by remember { mutableStateOf(Calendar.getInstance().time) }
+    var showDatePickerBack by remember { mutableStateOf(false) }
+    var diffInDays by remember { mutableIntStateOf(3) }
 
 
-    val styledText = buildAnnotatedString {
+    val styledTextDate = buildAnnotatedString {
         withStyle(
             style = SpanStyle(
                 color = Color.White,
@@ -99,8 +116,15 @@ fun SpecificSearchScreen(
                             timeInMillis = datePickerState.selectedDateMillis!!
                         }
 
-                        if (selectedDate.after(Calendar.getInstance())) {
+                        val isToday = calendarF.get(Calendar.YEAR) == selectedDate.get(Calendar.YEAR) &&
+                                calendarF.get(Calendar.DAY_OF_YEAR) == selectedDate.get(Calendar.DAY_OF_YEAR)
+
+                        if (selectedDate.after(today) || isToday) {
                             date = selectedDate.time
+                            if (hasBackDate) {
+                                selectedDate.add(Calendar.DAY_OF_YEAR, diffInDays)
+                                modifyBackDate(selectedDate.time, dateFormat, backDateText)
+                            }
                             showDatePicker = false
                         } else {
                             Toast.makeText(
@@ -128,7 +152,38 @@ fun SpecificSearchScreen(
     if (showDatePickerBack) {
         DatePickerDialog(
             onDismissRequest = { showDatePickerBack = false },
-            confirmButton = {}
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        val selectedDate = Calendar.getInstance().apply {
+                            timeInMillis = datePickerState.selectedDateMillis!!
+                        }
+
+                        diffInDays = selectedDate.get(Calendar.DAY_OF_YEAR) - calendarF.get(Calendar.DAY_OF_YEAR)
+
+                        val isValid = calendarF.get(Calendar.YEAR) == selectedDate.get(Calendar.YEAR) &&
+                                diffInDays >= 3
+                        if (isValid) {
+                            dateBack = selectedDate.time
+                            modifyBackDate(dateBack, dateFormat, backDateText)
+                            showDatePickerBack = false
+                        } else {
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.date_back_error),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                ) { Text("OK") }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showDatePickerBack = false
+                    }
+                ) { Text("Cancel") }
+            }
         )
         {
             DatePicker(state = datePickerState)
@@ -165,13 +220,13 @@ fun SpecificSearchScreen(
                 .padding(top = dimensionResource(id = R.dimen.ticket_offer_small_button_top_padding))
         ) {
             SmallButton(
-                leadingIcon = painterResource(id = R.drawable.plus_icon),
-                text = stringResource(R.string.back),
+                leadingIcon = backDateStartIcon,
+                text = backDateText.value,
                 onClick = { showDatePickerBack = true }
             )
 
             SmallButton(
-                text = styledText,
+                text = styledTextDate,
                 onClick = { showDatePicker = true })
             SmallButton(
                 leadingIcon = painterResource(id = R.drawable.profile_icon),
@@ -228,4 +283,26 @@ fun SpecificSearchScreen(
             )
         }
     }
+}
+
+fun modifyBackDate(time: Date, dateFormat: DateFormat, backDateText: MutableState<AnnotatedString>) {
+    val dateSplitBack = dateFormat.format(time).split(",")
+
+    val styledTextDateBack = buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                color = Color.White,
+            )
+        ) {
+            append(dateSplitBack[0])
+        }
+        withStyle(
+            style = SpanStyle(
+                color = Grey6,
+            )
+        ) {
+            append(", ${dateSplitBack[1]}")
+        }
+    }
+    backDateText.value = styledTextDateBack
 }

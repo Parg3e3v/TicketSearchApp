@@ -26,7 +26,7 @@ import com.parg3v.ticketsearchapp.view.specificSearch.SpecificSearchScreen
 import com.parg3v.ticketsearchapp.view.specificSearch.SpecificSearchViewModel
 import com.parg3v.ticketsearchapp.view.tickets.TicketsScreen
 import com.parg3v.ticketsearchapp.view.tickets.TicketsViewModel
-import com.parg3v.ticketsearchapp.view.todoScreen.ToDoScreen
+import com.parg3v.ticketsearchapp.view.todoScreens.ToDoScreen
 
 @Composable
 fun Navigation(
