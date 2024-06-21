@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.daggerHiltAndroid)
-    id("org.jetbrains.kotlin.plugin.serialization")
+    id(libs.plugins.kotlinSerialization.get().pluginId)
     kotlin("kapt")
 }
 
