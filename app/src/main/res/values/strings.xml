@@ -20,6 +20,7 @@
     <string name="temp_passangers_count">1,эконом</string>
     <string name="filters">фильтры</string>
     <string name="date_error">Выбранная дата должна быть после сегодняшнего дня, выберите еще раз</string>
+    <string name="date_back_error">Вам нужно выбрать дату обратного рейса не ранее чем через 3 дня после вылета. Пожалуйста, выберите заново.</string>
     <string name="flight_duration">%1$sч в пути</string>
     <string name="no_transfer">Без пересадок</string>
     <string name="prices_graph">График цен</string>

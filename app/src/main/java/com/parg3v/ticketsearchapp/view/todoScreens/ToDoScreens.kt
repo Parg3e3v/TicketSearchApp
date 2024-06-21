@@ -1,4 +1,4 @@
-package com.parg3v.ticketsearchapp.view.todoScreen
+package com.parg3v.ticketsearchapp.view.todoScreens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
