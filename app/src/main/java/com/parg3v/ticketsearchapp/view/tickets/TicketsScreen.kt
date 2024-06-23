@@ -24,7 +24,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.parg3v.ticketsearchapp.R
-import com.parg3v.ticketsearchapp.model.TicketItem
+import com.parg3v.ticketsearchapp.components.Shimmer
+import com.parg3v.ticketsearchapp.components.TicketItem
+import com.parg3v.ticketsearchapp.components.TicketItemPlaceHolder
 import com.parg3v.ticketsearchapp.model.TicketsState
 import com.parg3v.ticketsearchapp.ui.theme.Blue
 import com.parg3v.ticketsearchapp.ui.theme.Grey2
@@ -42,49 +44,68 @@ fun TicketsScreen(
 ) {
 
     Box(modifier = modifier.fillMaxSize()) {
-        LazyColumn {
-            item {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .padding(
-                            top = dimensionResource(id = R.dimen.ticket_screen_top_padding),
-                            bottom = dimensionResource(id = R.dimen.ticket_screen_top_bar_bottom_padding)
-                        )
-                        .background(Grey2)
-                        .fillMaxWidth()
-                        .padding(dimensionResource(id = R.dimen.ticket_screen_top_bar_inner_padding))
-                ) {
-                    Icon(
-                        modifier = Modifier.clickable { navController.popBackStack() },
-                        painter = painterResource(id = R.drawable.left_arrow_icon),
-                        contentDescription = null,
-                        tint = Blue
+        Column {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .padding(
+                        top = dimensionResource(id = R.dimen.ticket_screen_top_padding),
+                        bottom = dimensionResource(id = R.dimen.ticket_screen_top_bar_bottom_padding)
                     )
-                    Column(modifier = Modifier.padding(start = dimensionResource(id = R.dimen.ticket_screen_top_bar_text_start_padding))) {
-                        Text(
-                            text = "${fromProvider().trimEnd()}-${toProvider().trimEnd()}",
-                            style = MaterialTheme.typography.titleSmall
-                        )
-                        Text(
-                            modifier = Modifier.padding(top = dimensionResource(id = R.dimen.ticket_screen_top_bar_subtitle_top_padding)),
-                            text = "${dateProvider()}, ${passengersProvider()}",
-                            style = MaterialTheme.typography.headlineMedium.copy(color = Grey6)
-                        )
+                    .background(Grey2)
+                    .fillMaxWidth()
+                    .padding(dimensionResource(id = R.dimen.ticket_screen_top_bar_inner_padding))
+            ) {
+                Icon(
+                    modifier = Modifier.clickable { navController.popBackStack() },
+                    painter = painterResource(id = R.drawable.left_arrow_icon),
+                    contentDescription = null,
+                    tint = Blue
+                )
+                Column(modifier = Modifier.padding(start = dimensionResource(id = R.dimen.ticket_screen_top_bar_text_start_padding))) {
+                    Text(
+                        text = "${fromProvider().trimEnd()}-${toProvider().trimEnd()}",
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                    Text(
+                        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.ticket_screen_top_bar_subtitle_top_padding)),
+                        text = "${dateProvider()}, ${passengersProvider()}",
+                        style = MaterialTheme.typography.headlineMedium.copy(color = Grey6)
+                    )
+                }
+
+            }
+
+            Shimmer(isLoading = ticketsState.isLoading, contentAfterLoading = {
+                LazyColumn {
+
+                    if (ticketsState.data.isNullOrEmpty()) {
+                        item {
+                            Box(modifier = Modifier.fillMaxSize()) {
+                                Text(
+                                    text = stringResource(R.string.isempty),
+                                    modifier = Modifier.align(Alignment.Center)
+                                )
+                            }
+                        }
+                    } else {
+                        items(ticketsState.data) { ticket ->
+                            TicketItem(
+                                modifier = Modifier.padding(top = dimensionResource(id = R.dimen.ticket_screen_tickets_padding)),
+                                ticket = ticket
+                            )
+                        }
+
                     }
-
                 }
-            }
-            ticketsState.data?.let {
-                items(ticketsState.data) { ticket ->
-                    TicketItem(
-                        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.ticket_screen_tickets_padding)),
-                        ticket = ticket
-                    )
+            }, loadingComposable = {
+                LazyColumn {
+                    items(8) {
+                        TicketItemPlaceHolder(modifier = Modifier.padding(top = dimensionResource(id = R.dimen.ticket_screen_tickets_padding)))
+                    }
                 }
-            }
+            })
         }
-
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
@@ -121,4 +142,3 @@ fun TicketsScreen(
         }
     }
 }
-

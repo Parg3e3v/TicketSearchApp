@@ -26,4 +26,6 @@
     <string name="prices_graph">График цен</string>
     <string name="filter">Фильтр</string>
     <string name="no_data_error">Данные для ввода не верны</string>
+    <string name="text_loading">Обработка данных</string>
+    <string name="isempty">Здесь пока ничего нет</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.parg3v.ticketsearchapp.model
+package com.parg3v.ticketsearchapp.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +34,6 @@ import com.parg3v.domain.model.Price
 import com.parg3v.domain.model.Ticket
 import com.parg3v.ticketsearchapp.R
 import com.parg3v.ticketsearchapp.calculateFlightDuration
-import com.parg3v.ticketsearchapp.components.RoundedBackgroundWithPadding
 import com.parg3v.ticketsearchapp.formatWithThousandSeparator
 import com.parg3v.ticketsearchapp.ui.theme.Blue
 import com.parg3v.ticketsearchapp.ui.theme.Grey1

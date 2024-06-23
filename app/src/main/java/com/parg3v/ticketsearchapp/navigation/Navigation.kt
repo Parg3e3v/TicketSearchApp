@@ -68,7 +68,7 @@ fun Navigation(
             val offersState by airlineTicketsViewModel.offersState.collectAsStateWithLifecycle()
 
             AirlineTicketsScreen(
-                offersStateProvider = { offersState },
+                offersState = offersState,
                 fromFieldStateProvider = fromFieldStateProvider,
                 fromFieldInputChange = fromFieldInputChange,
                 toFieldStateProvider = toFieldStateProvider,

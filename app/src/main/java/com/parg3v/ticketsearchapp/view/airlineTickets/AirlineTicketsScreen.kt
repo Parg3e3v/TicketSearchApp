@@ -1,6 +1,7 @@
 package com.parg3v.ticketsearchapp.view.airlineTickets
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -21,14 +23,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.parg3v.ticketsearchapp.R
 import com.parg3v.ticketsearchapp.components.CustomSearchBar
 import com.parg3v.ticketsearchapp.components.OfferCard
+import com.parg3v.ticketsearchapp.components.OfferCardPlaceHolder
 import com.parg3v.ticketsearchapp.components.RoundedBackgroundWithPadding
+import com.parg3v.ticketsearchapp.components.Shimmer
 import com.parg3v.ticketsearchapp.model.OffersState
 import com.parg3v.ticketsearchapp.ui.theme.Grey7
 import com.parg3v.ticketsearchapp.ui.theme.TicketSearchAppTheme
 
 @Composable
 fun AirlineTicketsScreen(
-    offersStateProvider: () -> OffersState,
+    offersState: OffersState,
     fromFieldStateProvider: () -> String?,
     fromFieldInputChange: (String) -> Unit,
     toFieldStateProvider: () -> String,
@@ -75,17 +79,36 @@ fun AirlineTicketsScreen(
                 .fillMaxWidth()
                 .padding(top = dimensionResource(id = R.dimen.padding_airlines_music_title_top)),
         )
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.offer_card_space_between)),
-            modifier = Modifier.padding(top = dimensionResource(id = R.dimen.offer_cards_section_top_padding))
-        ) {
-            // TODO: SHIMMER
-            offersStateProvider().data?.let { list ->
-                items(list) { offer ->
-                    OfferCard(image = offerImages[offer.id - 1], offer = offer)
+        Shimmer(isLoading = offersState.isLoading, contentAfterLoading = {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.offer_card_space_between)),
+                modifier = Modifier.padding(top = dimensionResource(id = R.dimen.offer_cards_section_top_padding))
+            ) {
+                if (offersState.data.isNullOrEmpty()) {
+                    item {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            Text(
+                                text = stringResource(R.string.isempty),
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    }
+                } else {
+                    items(offersState.data) { offer ->
+                        OfferCard(image = offerImages[offer.id - 1], offer = offer)
+                    }
                 }
             }
-        }
+        }, loadingComposable = {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.offer_card_space_between)),
+                modifier = Modifier.padding(top = dimensionResource(id = R.dimen.offer_cards_section_top_padding))
+            ) {
+                items(3) { offer ->
+                    OfferCardPlaceHolder()
+                }
+            }
+        })
 
     }
 }
@@ -94,6 +117,6 @@ fun AirlineTicketsScreen(
 @Composable
 private fun Preview() {
     TicketSearchAppTheme {
-        AirlineTicketsScreen({ OffersState() }, { "" }, { _ -> }, { "" }, { })
+        AirlineTicketsScreen(OffersState(), { "" }, { _ -> }, { "" }, { })
     }
 }
