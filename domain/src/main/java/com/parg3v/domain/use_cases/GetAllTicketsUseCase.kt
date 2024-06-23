@@ -4,6 +4,7 @@ import com.parg3v.domain.common.Result
 import com.parg3v.domain.common.TicketError
 import com.parg3v.domain.model.Ticket
 import com.parg3v.domain.repository.TicketsRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
@@ -15,6 +16,7 @@ class GetAllTicketsUseCase @Inject constructor(
     operator fun invoke(): Flow<Result<List<Ticket>, TicketError>> = flow {
         try {
             emit(Result.Loading())
+            delay(3000) // for shimmer
             val ticketOffers = ticketsRepository.getAllTickets()
             emit(Result.Success(ticketOffers))
 

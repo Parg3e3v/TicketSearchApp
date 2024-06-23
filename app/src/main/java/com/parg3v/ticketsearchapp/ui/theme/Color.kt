@@ -16,3 +16,6 @@ val DarkGreen = Color(0xFF1E341F)
 val Red = Color(0xFFFF5E5E)
 val Orange = Color(0xFFF36E36)
 val Black = Color(0xFF0C0C0C)
+
+val ShimmingBackground = Color(0xFFCACACA)
+val ShimmingForeground = Color(0xFF8F8F8F)
