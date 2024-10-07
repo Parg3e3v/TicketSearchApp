@@ -13,8 +13,11 @@
 
 ## Screenshots
 
+### Home Screen
+<img src="https://imgur.com/g0WpBHr" width="250">
+
 ### Search Interface
-<img src="https://i.imgur.com/VgE3JON.png" width="250"> <img src="https://i.imgur.com/z3n5VMS.png" width="250"> <img src="https://i.imgur.com/JyXQGxD.png" width="250">
+<img src="https://imgur.com/iLjIvM5" width="250"> <img src="https://imgur.com/GpxkZsJ" width="250"> 
 
 ### Ticket Details
-<img src="https://i.imgur.com/YH9EULk.png" width="250">
+<img src="https://imgur.com/otZrOrj" width="250">
